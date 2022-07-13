@@ -1,0 +1,203 @@
+﻿@using Nop.Web.Framework;
+@using System.Linq;
+@using Nop.Web.Framework.UI;
+@using Nop.Web;
+@model Nop.Plugin.Widgets.Slide.Domain.SliderRecord
+
+@{ Layout = "_AdminLayout.cshtml"; }
+<script>
+    $(document).ready(function () {
+        bindBootstrapTabSelectEvent('slider-edit');
+    });
+</script>
+
+@using (Ajax.BeginForm("CreateUpdateSlider", "Slider", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "content" }))
+{
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div id="slider-edit" class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    @Html.RenderBootstrapTabHeader("Slider", @T("Plugins.Widgets.NivoSlider.Slider"), true)
+                    @Html.RenderBootstrapTabHeader("Images", @T("Plugins.Widgets.NivoSlider.Images"))
+                </ul>
+                <div class="tab-content">
+                    @Html.RenderBootstrapTabContent("Slider", Sliders(), true)
+                    @Html.RenderBootstrapTabContent("Images", Images(), false)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @helper Sliders()
+    {
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.NopLabelFor(model => model.SliderName)
+                        </div>
+                        <div class="col-md-3">
+                            @Html.NopEditorFor(model => model.SliderName)
+                            @Html.ValidationMessageFor(model => model.SliderName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">@Html.NopLabelFor(m => m.IsActive)</div>
+                        <div class="col-md-3">
+                            @Html.NopEditorFor(m => m.IsActive)
+                            @Html.ValidationMessageFor(m => m.IsActive)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">@Html.NopLabelFor(m => m.Interval)</div>
+                        <div class="col-md-3">
+                            @Html.NopEditorFor(m => m.Interval)
+                            @Html.ValidationMessageFor(m => m.Interval)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">@Html.NopLabelFor(m => m.PauseOnHover)</div>
+                        <div class="col-md-3">
+                            @Html.NopEditorFor(m => m.PauseOnHover)
+                            @Html.ValidationMessageFor(m => m.PauseOnHover)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">@Html.NopLabelFor(m => m.ZoneName)</div>
+                        <div class="col-md-3">
+                            @Html.NopDropDownListFor(m => m.ZoneName, new SelectList(
+                                new List<string>() {
+                                    "applyvendor_bottom",
+                                    "applyvendor_top",
+                                    "bloglist_page_after_posts",
+                                    "bloglist_page_before_posts",
+                                    "boards_activediscussions_after_header",
+                                    "boards_activediscussions_after_topics",
+                                    "boards_forumgroup_after_header",
+                                    "boards_forumgroup_bottom",
+                                    "boards_main_after_activediscussions",
+                                    "boards_main_after_header",
+                                    "boards_main_before_activediscussions",
+                                    "boards_search_after_results",
+                                    "boards_search_after_searchform",
+                                    "boards_search_before_results",
+                                    "boards_search_before_searchform",
+                                    "body_end_html_tag_before",
+                                    "body_start_html_tag_after",
+                                    "checkout_billing_address_bottom",
+                                    "checkout_billing_address_middle",
+                                    "checkout_billing_address_top",
+                                    "checkout_confirm_bottom",
+                                    "checkout_confirm_top",
+                                    "checkout_payment_info_bottom",
+                                    "checkout_payment_info_top",
+                                    "checkout_payment_method_bottom",
+                                    "checkout_payment_method_top",
+                                    "checkout_progress_after",
+                                    "checkout_progress_before",
+                                    "checkout_shipping_address_bottom",
+                                    "checkout_shipping_address_middle",
+                                    "checkout_shipping_address_top",
+                                    "checkout_shipping_method_bottom",
+                                    "checkout_shipping_method_top",
+                                    "contactus_bottom",
+                                    "contactus_top",
+                                    "contactvendor_bottom",
+                                    "contactvendor_top",
+                                    "content_after",
+                                    "content_before",
+                                    "footer",
+                                    "head_html_tag",
+                                    "header",
+                                    "header_links_after",
+                                    "header_links_before",
+                                    "header_menu_after",
+                                    "header_menu_before",
+                                    "header_selectors",
+                                    "home_page_before_best_sellers",
+                                    "home_page_before_categories",
+                                    "home_page_before_news",
+                                    "home_page_before_poll",
+                                    "home_page_before_products",
+                                    "home_page_bottom",
+                                    "home_page_top",
+                                    "left_side_column_after",
+                                    "left_side_column_after_blog_archive",
+                                    "left_side_column_after_category_navigation",
+                                    "left_side_column_before",
+                                    "left_side_column_blog_after",
+                                    "left_side_column_blog_before",
+                                    "main_column_after",
+                                    "main_column_before",
+                                    "mob_header_menu_after",
+                                    "mob_header_menu_before",
+                                    "newslist_page_after_items",
+                                    "newslist_page_before_items",
+                                    "notifications",
+                                    "op_checkout_billing_address_bottom",
+                                    "op_checkout_billing_address_middle",
+                                    "op_checkout_billing_address_top",
+                                    "op_checkout_confirm_bottom",
+                                    "op_checkout_confirm_top",
+                                    "op_checkout_payment_info_bottom",
+                                    "op_checkout_payment_info_top",
+                                    "op_checkout_payment_method_bottom",
+                                    "op_checkout_payment_method_top",
+                                    "op_checkout_shipping_address_bottom",
+                                    "op_checkout_shipping_address_middle",
+                                    "op_checkout_shipping_address_top",
+                                    "op_checkout_shipping_method_bottom",
+                                    "op_checkout_shipping_method_top",
+                                    "opc_content_after",
+                                    "opc_content_before",
+                                    "order_summary_cart_footer",
+                                    "order_summary_content_after",
+                                    "order_summary_content_before",
+                                    "order_summary_content_deals",
+                                    "productsearch_page_advanced",
+                                    "productsearch_page_after_results",
+                                    "productsearch_page_basic",
+                                    "productsearch_page_before_results",
+                                    "searchbox",
+                                    "searchbox_before_search_button",
+                                    "sitemap_after",
+                                    "sitemap_before"
+
+                        }))
+                            @Html.ValidationMessageFor(m => m.ZoneName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-4" style="padding-top: 6px;">
+                    <button type="submit" id="SaveSliderButton" name="save" class="btn bg-blue">
+                        <i class="fa fa-floppy-o"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+    }
+}
+
+@helper Images()
+{
+    if (Model.Id > 0)
+    {
+        @Html.Action("ManageImages", new { SliderId = Model.Id })
+    }
+    else
+    {
+       @T("Plugins.Widgets.Slide.CreateImageMessage")
+    }
+
+}

@@ -1,0 +1,9 @@
+﻿Group: Widgets
+FriendlyName: Slide
+SystemName: Widgets.Slide
+Version: 1.0
+SupportedVersions: 3.90
+Author: DMusabelliu
+DisplayOrder: 1
+FileName:Nop.Plugin.Widgets.Slide.dll
+Description: This plugin allows you to change and configure the contents of a page slider everywhere in the Platform
